@@ -1,9 +1,6 @@
 package com.og;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Scanner;
+import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -105,7 +102,30 @@ public class Main {
 
         System.out.println(getWordsByMaxLength.apply(maxLength, words));
 
+    }
 
+    public static void taskFour(){
+        Scanner scanner = new Scanner(System.in);
+        String[] str = scanner.nextLine().split(" ");
+
+        Function<String[], Integer[]> sortByEvenAtFirst = strings -> {
+            Integer[] ints = new Integer[strings.length];
+            for (int i = 0; i < strings.length; i++) {
+                ints[i] = Integer.parseInt(strings[i]);
+            }
+            Arrays.sort(ints);
+
+            Arrays.sort(ints, new Comparator<Integer>() {
+                @Override
+                public int compare(Integer o1, Integer o2) {
+                    if (o2 % 2 != 0 && o1 % 2 == 0) return -1;
+                    return 0;
+                }
+            });
+            return ints;
+        };
+
+        System.out.println(Arrays.toString(sortByEvenAtFirst.apply(str)));
     }
 
 }
